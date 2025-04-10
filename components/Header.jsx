@@ -1,10 +1,14 @@
-import { Shield } from 'lucide-react'
+"use client"
+import { Moon, Shield, Sun } from 'lucide-react'
 import Link from 'next/link'
 import React from 'react'
 import { Button } from './ui/button'
+import { useTheme } from 'next-themes'
 
 function Header() {
+    const {theme, setTheme} = useTheme();
   return (
+    <div className='pl-2 pr-2'>
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-2 font-bold text-xl">
@@ -26,18 +30,28 @@ function Header() {
             </Link>
           </nav>
           <div className="flex items-center gap-4">
-            <Link href="/login?type=business">
+            {/* <Link href="/login?type=business">
               <Button variant="ghost">Business Login</Button>
-            </Link>
-            <Link href="/login?type=consumer">
+            </Link> */}
+            {/* <Link href="/login?type=consumer">
               <Button variant="ghost">Consumer Login</Button>
-            </Link>
+            </Link> */}
+            <Button variant={"outline"} onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+                {
+                    theme === "dark" ? (
+                        <Sun></Sun>
+                    ) : (
+                        <Moon></Moon>
+                    )
+                }
+            </Button>
             <Link href="/login">
               <Button>Get Started</Button>
             </Link>
           </div>
         </div>
       </header>
+      </div>
   )
 }
 
