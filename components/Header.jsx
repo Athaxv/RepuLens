@@ -33,7 +33,7 @@ function Header() {
           <Button variant="outline" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
             {theme === "dark" ? <Sun /> : <Moon />}
           </Button>
-          <Link href="/login">
+          <Link href="/sign-up">
             <Button>Get Started</Button>
           </Link>
         </div>
