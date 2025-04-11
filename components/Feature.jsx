@@ -45,7 +45,7 @@ function Feature() {
             <div className="space-y-2">
             <div className='mt-2 text-xl'>
                 <Button variant={"outline"} className={"rounded-2xl bg-transparent"}>
-          <AnimatedGradientText className="text-sm font-medium">
+          <AnimatedGradientText  className="text-sm font-medium">
         Testimonials
       </AnimatedGradientText>
       </Button>

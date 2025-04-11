@@ -2,6 +2,7 @@ import React from 'react'
 import HeroVideoDialog from './magicui/hero-video-dialog'
 import Link from 'next/link'
 import { Button } from './ui/button'
+import { AuroraText } from './magicui/aurora-text'
 
 function Home() {
   return (
@@ -9,9 +10,10 @@ function Home() {
         <div className='space-y-6 text-center'>
             <div className='space-y-6 mx-auto'>
                 <h1 className='gradient-title text-4xl font-bold md:text-5xl lg:text-6xl xl:text-7xl '>
-                Transform How You Monitor 
+                Transform How You <AuroraText className="transition-all " speed="1">Monitor </AuroraText>
                     <br />
-                    Brand Reputation
+
+                    Brand <AuroraText speed="2">Reputation</AuroraText>
                 </h1>
                 <p className='mx-auto max-w-[600px] text-muted-foreground md:text-xl'>
                     Real-time sentiment analysis and reputation monitoring powered by advanced AI to help you make data-driven decisions.
