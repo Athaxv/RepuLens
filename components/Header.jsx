@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import { Button } from './ui/button'
 import { useTheme } from 'next-themes'
+import { AnimatedGradientText } from './magicui/animated-gradient-text'
 
 function Header() {
   const { theme, setTheme } = useTheme();
@@ -33,8 +34,13 @@ function Header() {
           <Button variant="outline" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
             {theme === "dark" ? <Sun /> : <Moon />}
           </Button>
+
           <Link href="/sign-up">
-            <Button>Get Started</Button>
+            <Button variant={"outline"} className={"bg-transparent"}>
+                      <AnimatedGradientText >
+                    Get Started
+                  </AnimatedGradientText>
+                  </Button>
           </Link>
         </div>
       </div>

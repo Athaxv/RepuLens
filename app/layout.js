@@ -1,17 +1,15 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from 'next/font/google'
+
+// Add Inter font with subsets (e.g., Latin) and font display set to swap
+
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { ClerkProvider } from "@clerk/nextjs";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({
+  subsets: ['latin'],  // You can add more subsets like 'latin-ext' if needed
+  display: 'swap',     // Ensures the font is displayed properly during loading
+})
 
 export const metadata = {
   title: "RepuLens",
@@ -23,7 +21,7 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={inter.className}
       >
         <ThemeProvider
             attribute="class"

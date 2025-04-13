@@ -20,7 +20,7 @@ export default function Page() {
       <div className="relative h-full w-full bg-white dark:bg-black transition-colors">
         <Home />
         <div
-          className={`absolute bottom-0 left-0 right-0 top-0 
+          className={`absolute z-0 bottom-0 left-0 right-0 top-0 
             ${theme === "dark" ? darkPattern : lightPattern} 
             bg-[size:14px_24px] 
             [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]`}
