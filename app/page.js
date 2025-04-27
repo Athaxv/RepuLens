@@ -29,7 +29,7 @@ export default function Page() {
         ></div>
         
       </div>
-      <div className="container mx-auto px-4">
+      <div className="container mt-20 mb-10 mx-auto px-4">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -37,7 +37,7 @@ export default function Page() {
               transition={{ duration: 0.8 }}
               className="mx-auto mb-12 text-center text-lg text-white/70"
             >
-              Become part of a network of professionals working at your dream companies
+              Join Thousands Using Repulens to Monitor Company Reputations
             </motion.p>
 
             <CompanyLogos />

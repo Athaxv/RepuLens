@@ -1,7 +1,7 @@
 "use client"
 import React from "react"
 
-export const AuroraText = ({ children, className = "", colors = ["#ffaa40", "#ffaa40", "#9c40ff", "#9c40ff"], speed = 3 }) => {
+export const AuroraText = ({ children, className = "", colors = ["#f7dd1c", "#fbd52a", "#fbc335", "#9c40ff"], speed = 3 }) => {
   const duration = 10 / speed
 
   const gradientStyle = {

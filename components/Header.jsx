@@ -5,6 +5,7 @@ import React from 'react'
 import { Button } from './ui/button'
 import { useTheme } from 'next-themes'
 import { AnimatedGradientText } from './magicui/animated-gradient-text'
+import Image from 'next/image'
 
 function Header() {
   const { theme, setTheme } = useTheme();
@@ -12,8 +13,9 @@ function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 px-2 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2 font-bold text-xl">
-          <Shield className="h-6 w-6 text-primary" />
+        <div className="flex items-center gap-2 font-bold text-xl cursor-pointer">
+          {/* <Shield className="h-6 w-6 text-primary" /> */}
+          <Image src={'/logoipsum-custom-logo.svg'} height={'30'} width={'30'} className='cursor-pointer'/>
           <span>RepuLens</span>
         </div>
         <nav className="hidden md:flex items-center gap-6">
