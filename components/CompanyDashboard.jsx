@@ -8,10 +8,12 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Progress } from "@/components/ui/progress"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { SentimentChart } from "@/components/sentiment-chart"
-import { GrowthChart } from "@/components/growth-chart"
-import { KeywordCloud } from "@/components/keyword-cloud"
-import { TopInfluencers } from "@/components/top-influencers"
+import { SentimentChart } from "./sentiment-chart"
+
+
+import { topInfluencers } from "./topInfluencers"
+import { GrowthChart } from "./growthChart"
+import { KeywordCloud } from "./KeywordCloud"
 
 // interface CompanyDashboardProps {
 //   isLoading: boolean
@@ -244,7 +246,7 @@ export function CompanyDashboard({ isLoading }) {
                     ))}
                 </div>
               ) : (
-                <TopInfluencers />
+                <topInfluencers />
               )}
             </CardContent>
             <CardFooter>
