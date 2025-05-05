@@ -4,7 +4,7 @@ import { Inter } from 'next/font/google'
 
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import { ClerkProvider } from "@clerk/nextjs";
+// import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({
   subsets: ['latin'],  // You can add more subsets like 'latin-ext' if needed
@@ -18,7 +18,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
+    // <ClerkProvider>
     <html lang="en" suppressHydrationWarning>
       <body
         className={inter.className}
@@ -33,6 +33,6 @@ export default function RootLayout({ children }) {
           </ThemeProvider>
       </body>
     </html>
-    </ClerkProvider>
+    // </ClerkProvider>
   );
 }
