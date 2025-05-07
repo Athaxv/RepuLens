@@ -3385,6 +3385,8 @@ export namespace Prisma {
     fullName: number
     jobTitle: number
     company: number
+    industries: number
+    trackCompanies: number
     userId: number
     _all: number
   }
@@ -3411,6 +3413,8 @@ export namespace Prisma {
     fullName?: true
     jobTitle?: true
     company?: true
+    industries?: true
+    trackCompanies?: true
     userId?: true
     _all?: true
   }
@@ -3491,7 +3495,9 @@ export namespace Prisma {
     id: string
     fullName: string
     jobTitle: string
-    company: string
+    company: string | null
+    industries: string[]
+    trackCompanies: string[]
     userId: string
     _count: ConsumerProfileCountAggregateOutputType | null
     _min: ConsumerProfileMinAggregateOutputType | null
@@ -3517,6 +3523,8 @@ export namespace Prisma {
     fullName?: boolean
     jobTitle?: boolean
     company?: boolean
+    industries?: boolean
+    trackCompanies?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["consumerProfile"]>
@@ -3526,6 +3534,8 @@ export namespace Prisma {
     fullName?: boolean
     jobTitle?: boolean
     company?: boolean
+    industries?: boolean
+    trackCompanies?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["consumerProfile"]>
@@ -3535,6 +3545,8 @@ export namespace Prisma {
     fullName?: boolean
     jobTitle?: boolean
     company?: boolean
+    industries?: boolean
+    trackCompanies?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["consumerProfile"]>
@@ -3544,10 +3556,12 @@ export namespace Prisma {
     fullName?: boolean
     jobTitle?: boolean
     company?: boolean
+    industries?: boolean
+    trackCompanies?: boolean
     userId?: boolean
   }
 
-  export type ConsumerProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "jobTitle" | "company" | "userId", ExtArgs["result"]["consumerProfile"]>
+  export type ConsumerProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "jobTitle" | "company" | "industries" | "trackCompanies" | "userId", ExtArgs["result"]["consumerProfile"]>
   export type ConsumerProfileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3567,7 +3581,9 @@ export namespace Prisma {
       id: string
       fullName: string
       jobTitle: string
-      company: string
+      company: string | null
+      industries: string[]
+      trackCompanies: string[]
       userId: string
     }, ExtArgs["result"]["consumerProfile"]>
     composites: {}
@@ -3997,6 +4013,8 @@ export namespace Prisma {
     readonly fullName: FieldRef<"ConsumerProfile", 'String'>
     readonly jobTitle: FieldRef<"ConsumerProfile", 'String'>
     readonly company: FieldRef<"ConsumerProfile", 'String'>
+    readonly industries: FieldRef<"ConsumerProfile", 'String[]'>
+    readonly trackCompanies: FieldRef<"ConsumerProfile", 'String[]'>
     readonly userId: FieldRef<"ConsumerProfile", 'String'>
   }
     
@@ -4461,6 +4479,8 @@ export namespace Prisma {
     fullName: 'fullName',
     jobTitle: 'jobTitle',
     company: 'company',
+    industries: 'industries',
+    trackCompanies: 'trackCompanies',
     userId: 'userId'
   };
 
@@ -4738,7 +4758,9 @@ export namespace Prisma {
     id?: StringFilter<"ConsumerProfile"> | string
     fullName?: StringFilter<"ConsumerProfile"> | string
     jobTitle?: StringFilter<"ConsumerProfile"> | string
-    company?: StringFilter<"ConsumerProfile"> | string
+    company?: StringNullableFilter<"ConsumerProfile"> | string | null
+    industries?: StringNullableListFilter<"ConsumerProfile">
+    trackCompanies?: StringNullableListFilter<"ConsumerProfile">
     userId?: StringFilter<"ConsumerProfile"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -4747,7 +4769,9 @@ export namespace Prisma {
     id?: SortOrder
     fullName?: SortOrder
     jobTitle?: SortOrder
-    company?: SortOrder
+    company?: SortOrderInput | SortOrder
+    industries?: SortOrder
+    trackCompanies?: SortOrder
     userId?: SortOrder
     user?: UserOrderByWithRelationInput
   }
@@ -4760,7 +4784,9 @@ export namespace Prisma {
     NOT?: ConsumerProfileWhereInput | ConsumerProfileWhereInput[]
     fullName?: StringFilter<"ConsumerProfile"> | string
     jobTitle?: StringFilter<"ConsumerProfile"> | string
-    company?: StringFilter<"ConsumerProfile"> | string
+    company?: StringNullableFilter<"ConsumerProfile"> | string | null
+    industries?: StringNullableListFilter<"ConsumerProfile">
+    trackCompanies?: StringNullableListFilter<"ConsumerProfile">
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId">
 
@@ -4768,7 +4794,9 @@ export namespace Prisma {
     id?: SortOrder
     fullName?: SortOrder
     jobTitle?: SortOrder
-    company?: SortOrder
+    company?: SortOrderInput | SortOrder
+    industries?: SortOrder
+    trackCompanies?: SortOrder
     userId?: SortOrder
     _count?: ConsumerProfileCountOrderByAggregateInput
     _max?: ConsumerProfileMaxOrderByAggregateInput
@@ -4782,7 +4810,9 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"ConsumerProfile"> | string
     fullName?: StringWithAggregatesFilter<"ConsumerProfile"> | string
     jobTitle?: StringWithAggregatesFilter<"ConsumerProfile"> | string
-    company?: StringWithAggregatesFilter<"ConsumerProfile"> | string
+    company?: StringNullableWithAggregatesFilter<"ConsumerProfile"> | string | null
+    industries?: StringNullableListFilter<"ConsumerProfile">
+    trackCompanies?: StringNullableListFilter<"ConsumerProfile">
     userId?: StringWithAggregatesFilter<"ConsumerProfile"> | string
   }
 
@@ -4965,7 +4995,9 @@ export namespace Prisma {
     id?: string
     fullName: string
     jobTitle: string
-    company: string
+    company?: string | null
+    industries?: ConsumerProfileCreateindustriesInput | string[]
+    trackCompanies?: ConsumerProfileCreatetrackCompaniesInput | string[]
     user: UserCreateNestedOneWithoutConsumerProfileInput
   }
 
@@ -4973,7 +5005,9 @@ export namespace Prisma {
     id?: string
     fullName: string
     jobTitle: string
-    company: string
+    company?: string | null
+    industries?: ConsumerProfileCreateindustriesInput | string[]
+    trackCompanies?: ConsumerProfileCreatetrackCompaniesInput | string[]
     userId: string
   }
 
@@ -4981,7 +5015,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
     jobTitle?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    industries?: ConsumerProfileUpdateindustriesInput | string[]
+    trackCompanies?: ConsumerProfileUpdatetrackCompaniesInput | string[]
     user?: UserUpdateOneRequiredWithoutConsumerProfileNestedInput
   }
 
@@ -4989,7 +5025,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
     jobTitle?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    industries?: ConsumerProfileUpdateindustriesInput | string[]
+    trackCompanies?: ConsumerProfileUpdatetrackCompaniesInput | string[]
     userId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -4997,7 +5035,9 @@ export namespace Prisma {
     id?: string
     fullName: string
     jobTitle: string
-    company: string
+    company?: string | null
+    industries?: ConsumerProfileCreateindustriesInput | string[]
+    trackCompanies?: ConsumerProfileCreatetrackCompaniesInput | string[]
     userId: string
   }
 
@@ -5005,14 +5045,18 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
     jobTitle?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    industries?: ConsumerProfileUpdateindustriesInput | string[]
+    trackCompanies?: ConsumerProfileUpdatetrackCompaniesInput | string[]
   }
 
   export type ConsumerProfileUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
     jobTitle?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    industries?: ConsumerProfileUpdateindustriesInput | string[]
+    trackCompanies?: ConsumerProfileUpdatetrackCompaniesInput | string[]
     userId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -5293,11 +5337,21 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type ConsumerProfileCountOrderByAggregateInput = {
     id?: SortOrder
     fullName?: SortOrder
     jobTitle?: SortOrder
     company?: SortOrder
+    industries?: SortOrder
+    trackCompanies?: SortOrder
     userId?: SortOrder
   }
 
@@ -5431,10 +5485,28 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutBusinessProfileInput, UserUpdateWithoutBusinessProfileInput>, UserUncheckedUpdateWithoutBusinessProfileInput>
   }
 
+  export type ConsumerProfileCreateindustriesInput = {
+    set: string[]
+  }
+
+  export type ConsumerProfileCreatetrackCompaniesInput = {
+    set: string[]
+  }
+
   export type UserCreateNestedOneWithoutConsumerProfileInput = {
     create?: XOR<UserCreateWithoutConsumerProfileInput, UserUncheckedCreateWithoutConsumerProfileInput>
     connectOrCreate?: UserCreateOrConnectWithoutConsumerProfileInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type ConsumerProfileUpdateindustriesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type ConsumerProfileUpdatetrackCompaniesInput = {
+    set?: string[]
+    push?: string | string[]
   }
 
   export type UserUpdateOneRequiredWithoutConsumerProfileNestedInput = {
@@ -5671,14 +5743,18 @@ export namespace Prisma {
     id?: string
     fullName: string
     jobTitle: string
-    company: string
+    company?: string | null
+    industries?: ConsumerProfileCreateindustriesInput | string[]
+    trackCompanies?: ConsumerProfileCreatetrackCompaniesInput | string[]
   }
 
   export type ConsumerProfileUncheckedCreateWithoutUserInput = {
     id?: string
     fullName: string
     jobTitle: string
-    company: string
+    company?: string | null
+    industries?: ConsumerProfileCreateindustriesInput | string[]
+    trackCompanies?: ConsumerProfileCreatetrackCompaniesInput | string[]
   }
 
   export type ConsumerProfileCreateOrConnectWithoutUserInput = {
@@ -5736,14 +5812,18 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
     jobTitle?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    industries?: ConsumerProfileUpdateindustriesInput | string[]
+    trackCompanies?: ConsumerProfileUpdatetrackCompaniesInput | string[]
   }
 
   export type ConsumerProfileUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     fullName?: StringFieldUpdateOperationsInput | string
     jobTitle?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
+    company?: NullableStringFieldUpdateOperationsInput | string | null
+    industries?: ConsumerProfileUpdateindustriesInput | string[]
+    trackCompanies?: ConsumerProfileUpdatetrackCompaniesInput | string[]
   }
 
   export type UserCreateWithoutBusinessProfileInput = {
