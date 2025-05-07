@@ -9,7 +9,9 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "@/components/ui/use-toast";
+// import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
+
 // import { BackgroundEffect } from "@/components/background-effect"
 
 export default function SignupPage() {
@@ -24,24 +26,40 @@ export default function SignupPage() {
   });
 
   const handleUserTypeSelect = (type) => {
-    setUserType(type);
+    const typed = type.toUpperCase();
+    setUserType(typed);
     setStep(2);
   };
 
-  const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
-  };
+  // const handleChange = (e) => {
+  //   const { id, value } = e.target;
+  //   setFormData((prev) => ({ ...prev, [id]: value }));
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // console.log(formData)
-    // console.log(userType)
-    // Simulate API call
-
+    console.log(formData);
+  
     try {
-      const res = await fetch("/actions/user", {
+      const checkUser = await fetch("api/userExist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: formData.email }), // use formData.email here
+      });
+  
+      const { user } = await checkUser.json();
+  
+      if (user) {
+        console.log("User already exists");
+        toast.error("User already exists");
+        setIsLoading(false); // Make sure to reset loading here too
+        return;
+      }
+  
+      const res = await fetch("/api/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,27 +68,32 @@ export default function SignupPage() {
           name: formData.name,
           email: formData.email,
           password: formData.password,
-          // userType: userType,
+          userType: userType,
         }),
       });
-
-      if (res.ok) {
-        const form = e.target;
-        form.reset();
-      } else {
-        // toast.error("User registration Failed")
+  
+      const data = await res.json(); // Parse JSON response here
+  
+      if (!res.ok) {
+        toast("Registration Failed");
         console.log("User registration Failed");
+      } else {
+        setFormData({ name: "", email: "", password: "" });
+        setUserType(null);
+        setStep(1);
+  
+        toast("User registered successfully");
+  
+        router.push(`/onboarding/${userType}`);
       }
     } catch (error) {
       console.log("Error during registration", error);
-      // toast.error("Error during registration", error)
-    }
-    setTimeout(() => {
+      toast("Some error ocurred");
+    } finally {
       setIsLoading(false);
-      // Redirect to onboarding
-      // router.push(`/onboarding/${userType}`)
-    }, 1500);
+    }
   };
+  
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center bg-black text-white">
@@ -146,7 +169,9 @@ export default function SignupPage() {
               <Input
                 id="name"
                 value={formData.name}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 placeholder="John Doe"
                 required
                 className="border-white/20 bg-white/5 text-white placeholder:text-white/50 focus:border-amber-400/50 focus:ring-amber-400/50"
@@ -160,7 +185,9 @@ export default function SignupPage() {
                 id="email"
                 type="email"
                 value={formData.email}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 placeholder="name@example.com"
                 required
                 className="border-white/20 bg-white/5 text-white placeholder:text-white/50 focus:border-amber-400/50 focus:ring-amber-400/50"
@@ -174,7 +201,9 @@ export default function SignupPage() {
                 id="password"
                 type="password"
                 value={formData.password}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
                 required
                 className="border-white/20 bg-white/5 text-white placeholder:text-white/50 focus:border-amber-400/50 focus:ring-amber-400/50"
               />
