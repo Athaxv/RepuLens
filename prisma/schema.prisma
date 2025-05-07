@@ -45,8 +45,8 @@ model BusinessProfile {
 
 model ConsumerProfile {
   id        String @id @default(cuid())
-  fullName  String
-  jobTitle  String
+  fullName  String?
+  jobTitle  String?
   company   String?
   industries String[]
   companiesTracked String[]
