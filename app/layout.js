@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google'
 import "./globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import { Toaster } from "@/components/ui/sonner"
+import { AuthProvider } from './providers';
 // import { ClerkProvider } from "@clerk/nextjs";
 
 const inter = Inter({
@@ -30,8 +31,9 @@ export default function RootLayout({ children }) {
             enableSystem
             disableTransitionOnChange
           >
+            <AuthProvider>
             {children}
-            
+            </AuthProvider>
           </ThemeProvider>
           <Toaster />
       </body>

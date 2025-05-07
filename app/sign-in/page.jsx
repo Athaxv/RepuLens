@@ -1,50 +1,66 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { ArrowLeft, Loader2, Sparkles } from "lucide-react"
-import { motion } from "framer-motion"
-import { signIn } from "next-auth/react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { ArrowLeft, Loader2, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
+import { getSession, signIn } from "next-auth/react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { toast } from "@/components/ui/use-toast";
 // import { BackgroundEffect } from "@/components/background-effect"
 
 export default function LoginPage() {
-  const router = useRouter()
-  const [isLoading, setIsLoading] = useState(false)
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
+    e.preventDefault();
+    setIsLoading(true);
   
-    try {
-      const res = await signIn("credentials", {
-        redirect: false,
-        email,
-        password,
-        // role
-      })
+    const result = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+    });
   
-      if (!res || !res.ok) {
-        throw new Error("Invalid credentials")
+    console.log("SignIn Result:", result);
+  
+    if (result?.ok) {
+      toast({
+        title: "Login successful!",
+        description: "Welcome back.",
+      });
+  
+      // Wait for session to update
+      const session = await getSession();
+      console.log("Session after login:", session);
+  
+      const user = session?.user;
+  
+      if (user?.hasConsumerProfile) {
+        // router.push(`/dashboard/consumer/${user.consumerId}`);
+        router.push(`/dashboard/`);
+      } else if (user?.hasBusinessProfile) {
+        router.push(`/dashboard/`);
+        // router.push(`/dashboard/business/${user.businessId}`);
+      } else {
+        router.push("/onboarding");
       }
-  
-      // If your backend returns role via session or JWT, you should fetch it from there
-      // For now, you can simulate user role based on email domain
-      const isBusinessUser = email.includes("business") || email.includes("company")
-      router.push(isBusinessUser ? "/dashboard/business" : "/dashboard")
-    } catch (error) {
-      console.error("Login failed:", error.message)
-      // Optionally: Show error toast here
-    } finally {
-      setIsLoading(false)
+    } else {
+      toast({
+        title: "Login failed",
+        description: "Invalid email or password",
+        variant: "destructive",
+      });
     }
-  }
   
+    setIsLoading(false);
+  };
 
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center bg-black text-white">
@@ -72,7 +88,9 @@ export default function LoginPage() {
             </div>
           </div>
           <h1 className="text-2xl font-bold">Welcome back</h1>
-          <p className="text-sm text-white/70">Sign in to your Repulens account</p>
+          <p className="text-sm text-white/70">
+            Sign in to your Repulens account
+          </p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -95,7 +113,10 @@ export default function LoginPage() {
               <Label htmlFor="password" className="text-white/70">
                 Password
               </Label>
-              <Link href="/forgot-password" className="text-xs text-white/70 hover:text-amber-400">
+              <Link
+                href="/forgot-password"
+                className="text-xs text-white/70 hover:text-amber-400"
+              >
                 Forgot password?
               </Link>
             </div>
@@ -162,7 +183,11 @@ export default function LoginPage() {
             type="button"
             className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"
           >
-            <svg className="mr-2 h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
+            <svg
+              className="mr-2 h-4 w-4"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
               <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-4.2 14H15v-5.6h-1.8V17zm-3.6 0h1.8v-5.6h-1.8V17zm-3.6 0h1.8v-5.6H7.6V17zM15 7.6H9v1.8h6V7.6z" />
             </svg>
             LinkedIn
@@ -177,5 +202,5 @@ export default function LoginPage() {
         </p>
       </motion.div>
     </div>
-  )
+  );
 }
