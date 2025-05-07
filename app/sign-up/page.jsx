@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Loader2, Sparkles, Building2, User } from "lucide-react";
@@ -27,8 +27,8 @@ export default function SignupPage() {
 
   const handleUserTypeSelect = (type) => {
     const typed = type.toUpperCase();
-    setUserType(typed);
-    setStep(2);
+    setUserType(typed); // Keep as-is (lowercase 'business' or 'consumer')
+  setStep(2);
   };
 
   // const handleChange = (e) => {
@@ -71,9 +71,10 @@ export default function SignupPage() {
           userType: userType,
         }),
       });
-  
-      const data = await res.json(); // Parse JSON response here
-  
+
+      const data = await res.json();
+      console.log("id", data.userId)
+
       if (!res.ok) {
         toast("Registration Failed");
         console.log("User registration Failed");
@@ -83,8 +84,9 @@ export default function SignupPage() {
         setStep(1);
   
         toast("User registered successfully");
-  
-        router.push(`/onboarding/${userType}`);
+
+        const userid = data.userId;
+        router.push(`/onboarding/${userType}/${userid}`);
       }
     } catch (error) {
       console.log("Error during registration", error);

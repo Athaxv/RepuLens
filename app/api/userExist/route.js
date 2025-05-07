@@ -8,7 +8,7 @@ export async function POST(req){
             where: { email },
             select: { id: true }
           });
-        console.log(user)
+
         return NextResponse.json({ user })
     } catch (error) {
         console.log(error)

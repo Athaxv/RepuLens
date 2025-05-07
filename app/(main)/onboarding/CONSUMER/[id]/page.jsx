@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { Check, ChevronRight, Loader2, Sparkles, User } from "lucide-react"
 import { motion } from "framer-motion"
 
@@ -8,9 +8,12 @@ import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { toast } from "sonner"
 // import { BackgroundEffect } from "@/components/background-effect"
 
 export default function ConsumerOnboardingPage() {
+  const params = useParams()
+  const userId = params.id
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [step, setStep] = useState(1)
@@ -28,29 +31,60 @@ export default function ConsumerOnboardingPage() {
 
   const handleInterestToggle = (interest) => {
     setFormData((prev) => {
-      const interests = [...prev.interests]
-      if (interests.includes(interest)) {
-        return { ...prev, interests: interests.filter((i) => i !== interest) }
-      } else {
-        return { ...prev, interests: [...interests, interest] }
-      }
-    })
-  }
+      const interests = prev.interests || []; // fallback to empty array
+  
+      const updatedInterests = interests.includes(interest)
+        ? interests.filter((i) => i !== interest)
+        : [...interests, interest];
+  
+      return { ...prev, interests: updatedInterests };
+    });
+  };
+  
 
   const handleNext = () => {
     setStep((prev) => prev + 1)
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setIsLoading(true);
+  console.log(formData)
+  // console.log("id",userId)
+  try {
+    const requestData = {
+      ...formData,
+      // Make sure these are always arrays even if empty
+      industries: Array.isArray(formData.industries) 
+        ? formData.industries 
+        : formData.industries.split(",").map(item => item.trim()),
+      companiesTracked: Array.isArray(formData.companiesTracked)
+        ? formData.companiesTracked
+        : formData.companiesTracked.split(",").map(item => item.trim())
+    };
+    console.log("Sending data:", JSON.stringify(requestData));
+    const res = await fetch(`/api/onboarding/consumer/${userId}`, {
+      method: "POST", // Use "POST" if you're creating, "PUT" for updating
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({formData}),
+    });
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false)
-      router.push("/dashboard")
-    }, 1500)
+
+    const data = await res.json()
+    if (!res.ok) throw new Error("Failed to save consumer details");
+
+    // Show success toast (adjust according to your toast library)
+    toast("Profile updated successfully!");
+
+    // Redirect to dashboard
+    router.push("/dashboard");
+  } catch (error) {
+    toast("Error saving profile. Please try again.");
+  } finally {
+    setIsLoading(false);
   }
+};
+
 
   const industries = [
     "Technology",

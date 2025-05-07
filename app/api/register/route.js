@@ -12,7 +12,7 @@ export async function POST(req) {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        await db.user.create({
+        const newUser = await db.user.create({
             data: {
                 fullName: name,
                 email,
@@ -21,7 +21,10 @@ export async function POST(req) {
             },
         });
 
-        return NextResponse.json({ message: "User registered successfully" }, { status: 201 });
+        return NextResponse.json(
+            { message: "User registered successfully", userId: newUser.id },
+            { status: 201 }
+          );
     } catch (error) {
         console.error("Registration error:", error);
         return NextResponse.json(
