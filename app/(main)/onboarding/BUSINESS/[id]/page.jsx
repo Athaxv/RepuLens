@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { Building2, Check, ChevronRight, Loader2, Sparkles } from "lucide-react"
 import { motion } from "framer-motion"
 
@@ -11,6 +11,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 // import { BackgroundEffect } from "@/components/background-effect"
 
 export default function BusinessOnboardingPage() {
+  const params = useParams()
+  const userId = params.id
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [step, setStep] = useState(1)
@@ -36,13 +38,37 @@ export default function BusinessOnboardingPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)
-
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false)
+  
+    try {
+      console.log(formData)
+      const response = await fetch(`/api/onboarding/business/${userId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId, // from useParams
+          ...formData,
+        }),
+      })
+  
+      if (!response.ok) {
+        throw new Error("Failed to submit form")
+      }
+  
+      const data = await response.json()
+      console.log("Submission successful:", data)
+  
+      // Navigate to dashboard or success page
       router.push("/dashboard")
-    }, 1500)
+    } catch (error) {
+      console.error("Submission error:", error)
+      // Optionally show an error toast here
+    } finally {
+      setIsLoading(false)
+    }
   }
+  
 
   const industries = [
     "Technology",
@@ -150,8 +176,8 @@ export default function BusinessOnboardingPage() {
                   Industry
                 </Label>
                 <Select value={formData.industry} onValueChange={(value) => handleChange("industry", value)} required>
-                  <SelectTrigger className="border-white/20 bg-white/5 text-white focus:border-amber-400/50 focus:ring-amber-400/50">
-                    <SelectValue placeholder="Select your industry" />
+                  <SelectTrigger className="border-white/20 bg-white/5 text-white w-full focus:border-amber-400/50 focus:ring-amber-400/50">
+                    <SelectValue placeholder="Select your industry" className="w-full" />
                   </SelectTrigger>
                   <SelectContent className="border-white/10 bg-black/90 text-white backdrop-blur-md">
                     {industries.map((industry) => (
@@ -172,7 +198,7 @@ export default function BusinessOnboardingPage() {
                     onValueChange={(value) => handleChange("revenueRange", value)}
                     required
                   >
-                    <SelectTrigger className="border-white/20 bg-white/5 text-white focus:border-amber-400/50 focus:ring-amber-400/50">
+                    <SelectTrigger className="border-white/20 w-full bg-white/5 text-white focus:border-amber-400/50 focus:ring-amber-400/50">
                       <SelectValue placeholder="Select range" />
                     </SelectTrigger>
                     <SelectContent className="border-white/10 bg-black/90 text-white backdrop-blur-md">
@@ -193,7 +219,7 @@ export default function BusinessOnboardingPage() {
                     onValueChange={(value) => handleChange("employeeCount", value)}
                     required
                   >
-                    <SelectTrigger className="border-white/20 bg-white/5 text-white focus:border-amber-400/50 focus:ring-amber-400/50">
+                    <SelectTrigger className="border-white/20 w-full bg-white/5 text-white focus:border-amber-400/50 focus:ring-amber-400/50">
                       <SelectValue placeholder="Select range" />
                     </SelectTrigger>
                     <SelectContent className="border-white/10 bg-black/90 text-white backdrop-blur-md">

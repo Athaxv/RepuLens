@@ -50,23 +50,12 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   setIsLoading(true);
   console.log(formData)
-  // console.log("id",userId)
+  console.log("id",userId)
   try {
-    const requestData = {
-      ...formData,
-      // Make sure these are always arrays even if empty
-      industries: Array.isArray(formData.industries) 
-        ? formData.industries 
-        : formData.industries.split(",").map(item => item.trim()),
-      companiesTracked: Array.isArray(formData.companiesTracked)
-        ? formData.companiesTracked
-        : formData.companiesTracked.split(",").map(item => item.trim())
-    };
-    console.log("Sending data:", JSON.stringify(requestData));
     const res = await fetch(`/api/onboarding/consumer/${userId}`, {
       method: "POST", // Use "POST" if you're creating, "PUT" for updating
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({formData}),
+      body: JSON.stringify(formData),
     });
 
 

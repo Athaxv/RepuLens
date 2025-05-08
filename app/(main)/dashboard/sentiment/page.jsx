@@ -64,7 +64,7 @@ export default function SentimentAnalysisPage() {
   }
 
   return (
-    <div className="container py-6 md:py-8 lg:py-10">
+    <div className="container py-6 md:py-8 lg:py-10 px-5 px-auto">
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
