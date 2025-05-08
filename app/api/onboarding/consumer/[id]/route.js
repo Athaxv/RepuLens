@@ -31,7 +31,7 @@ export async function POST(req, context) {
         company: company,
         userId: userId,
         industries: interests,
-        trackCompanies: companiesTracked,
+        companiesTracked: companiesTracked,
          // ✅ Must match your Prisma schema
       },
     });

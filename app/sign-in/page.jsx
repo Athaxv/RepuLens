@@ -152,12 +152,7 @@ export default function LoginPage() {
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <Button
-            variant="outline"
-            type="button"
-            className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"
-          >
-            <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
+        <Button variant={"outline"} onClick={() => signIn("google")}><svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
               <path
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
                 fill="#4285F4"
@@ -175,23 +170,22 @@ export default function LoginPage() {
                 fill="#EA4335"
               />
               <path d="M1 1h22v22H1z" fill="none" />
-            </svg>
-            Google
-          </Button>
-          <Button
-            variant="outline"
-            type="button"
-            className="border-white/20 bg-white/5 text-white hover:bg-white/10 hover:text-white"
-          >
-            <svg
-              className="mr-2 h-4 w-4"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-4.2 14H15v-5.6h-1.8V17zm-3.6 0h1.8v-5.6h-1.8V17zm-3.6 0h1.8v-5.6H7.6V17zM15 7.6H9v1.8h6V7.6z" />
-            </svg>
-            LinkedIn
-          </Button>
+            </svg> Google</Button>
+            <Button variant={"outline"}
+  onClick={() => signIn("linkedin")}
+  className="flex items-center gap-2 p-2 border rounded"
+>
+<svg
+  className="mr-2 h-4 w-4"
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 24 24"
+  fill="currentColor"
+>
+  <path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zm-11 19H5V9h3v10zm-1.5-11.3c-.97 0-1.75-.79-1.75-1.75S5.53 4.2 6.5 4.2s1.75.79 1.75 1.75-.78 1.75-1.75 1.75zM20 19h-3v-5.2c0-1.24-.03-2.83-1.72-2.83-1.72 0-1.98 1.34-1.98 2.72V19h-3V9h2.88v1.36h.04c.4-.76 1.36-1.56 2.8-1.56 3 0 3.56 1.97 3.56 4.53V19z" />
+</svg>
+
+   LinkedIn
+</Button>
         </div>
 
         <p className="text-center text-sm text-white/70">

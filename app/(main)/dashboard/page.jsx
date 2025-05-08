@@ -23,12 +23,16 @@ import { CompetitorDashboard } from "@/components/competitor-dashboard"
 import { TopCompetitors } from "@/components/top-competitors"
 import { RefreshButton } from "@/components/refresh-button"
 import { AIAssistant } from "@/components/ai-assistant"
+import { useSession } from "next-auth/react"
 
 export default function DashboardPage() {
+  const { data: session } = useSession();
   const [isLoading, setIsLoading] = useState(true)
   const [mounted, setMounted] = useState(false)
   const [userName, setUserName] = useState("Sarah Johnson")
   // const [userType, setUserType] = useState("business")
+  console.log("loggedIn", session)
+
 
   useEffect(() => {
     setMounted(true)
@@ -61,7 +65,7 @@ export default function DashboardPage() {
                 {/* <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
                 <RefreshButton /> */}
               </div>
-              <h1 className="text-2xl font-bold">Welcome back, {userName}</h1>
+              <h1 className="text-2xl font-bold">Welcome back, {session?.fullName}</h1>
               <p className="text-white/70">Here's what's happening with your company today</p>
             </motion.div>
 

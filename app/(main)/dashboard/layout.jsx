@@ -6,15 +6,17 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel,
 import { Input } from '@/components/ui/input'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Bell, ChevronDown, LogOut, Menu, Search, Settings, Sparkles, User } from 'lucide-react'
+import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 
 function Layout({ children }) {
+  const { data: session } = useSession();
     const [isLoading, setIsLoading] = useState(true)
       const [mounted, setMounted] = useState(false)
       const [userName, setUserName] = useState("Sarah Johnson")
       const [userType, setUserType] = useState("business")
-    
+      console.log("data",session)
       useEffect(() => {
         setMounted(true)
         // Simulate loading
@@ -95,7 +97,7 @@ function Layout({ children }) {
                 size="sm"
                 className="gap-1 border-white/10 bg-white/5 text-white hover:bg-white/10 hover:text-white"
               >
-                {userName}
+                {session?.fullName}
                 <ChevronDown className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
@@ -111,7 +113,7 @@ function Layout({ children }) {
                 Settings
               </DropdownMenuItem>
               <DropdownMenuSeparator className="bg-white/10" />
-              <DropdownMenuItem className="focus:bg-white/10 focus:text-white">
+              <DropdownMenuItem className="focus:bg-white/10 focus:text-white" onClick={() => signOut({ callbackUrl: "/" })}>
                 <LogOut className="mr-2 h-4 w-4" />
                 Log out
               </DropdownMenuItem>
