@@ -2207,12 +2207,10 @@ export namespace Prisma {
 
   export type BusinessProfileAvgAggregateOutputType = {
     annualRevenue: number | null
-    numberOfEmployees: number | null
   }
 
   export type BusinessProfileSumAggregateOutputType = {
     annualRevenue: number | null
-    numberOfEmployees: number | null
   }
 
   export type BusinessProfileMinAggregateOutputType = {
@@ -2220,7 +2218,7 @@ export namespace Prisma {
     businessName: string | null
     industry: string | null
     annualRevenue: number | null
-    numberOfEmployees: number | null
+    numberOfEmployees: string | null
     companyWebsite: string | null
     twitter: string | null
     linkedin: string | null
@@ -2233,7 +2231,7 @@ export namespace Prisma {
     businessName: string | null
     industry: string | null
     annualRevenue: number | null
-    numberOfEmployees: number | null
+    numberOfEmployees: string | null
     companyWebsite: string | null
     twitter: string | null
     linkedin: string | null
@@ -2258,12 +2256,10 @@ export namespace Prisma {
 
   export type BusinessProfileAvgAggregateInputType = {
     annualRevenue?: true
-    numberOfEmployees?: true
   }
 
   export type BusinessProfileSumAggregateInputType = {
     annualRevenue?: true
-    numberOfEmployees?: true
   }
 
   export type BusinessProfileMinAggregateInputType = {
@@ -2397,8 +2393,8 @@ export namespace Prisma {
     businessName: string
     industry: string
     annualRevenue: number | null
-    numberOfEmployees: number
-    companyWebsite: string
+    numberOfEmployees: string | null
+    companyWebsite: string | null
     twitter: string | null
     linkedin: string | null
     instagram: string | null
@@ -2500,8 +2496,8 @@ export namespace Prisma {
       businessName: string
       industry: string
       annualRevenue: number | null
-      numberOfEmployees: number
-      companyWebsite: string
+      numberOfEmployees: string | null
+      companyWebsite: string | null
       twitter: string | null
       linkedin: string | null
       instagram: string | null
@@ -2934,7 +2930,7 @@ export namespace Prisma {
     readonly businessName: FieldRef<"BusinessProfile", 'String'>
     readonly industry: FieldRef<"BusinessProfile", 'String'>
     readonly annualRevenue: FieldRef<"BusinessProfile", 'Int'>
-    readonly numberOfEmployees: FieldRef<"BusinessProfile", 'Int'>
+    readonly numberOfEmployees: FieldRef<"BusinessProfile", 'String'>
     readonly companyWebsite: FieldRef<"BusinessProfile", 'String'>
     readonly twitter: FieldRef<"BusinessProfile", 'String'>
     readonly linkedin: FieldRef<"BusinessProfile", 'String'>
@@ -3369,6 +3365,7 @@ export namespace Prisma {
     fullName: string | null
     jobTitle: string | null
     company: string | null
+    companiesTracked: string | null
     userId: string | null
   }
 
@@ -3377,6 +3374,7 @@ export namespace Prisma {
     fullName: string | null
     jobTitle: string | null
     company: string | null
+    companiesTracked: string | null
     userId: string | null
   }
 
@@ -3386,7 +3384,7 @@ export namespace Prisma {
     jobTitle: number
     company: number
     industries: number
-    trackCompanies: number
+    companiesTracked: number
     userId: number
     _all: number
   }
@@ -3397,6 +3395,7 @@ export namespace Prisma {
     fullName?: true
     jobTitle?: true
     company?: true
+    companiesTracked?: true
     userId?: true
   }
 
@@ -3405,6 +3404,7 @@ export namespace Prisma {
     fullName?: true
     jobTitle?: true
     company?: true
+    companiesTracked?: true
     userId?: true
   }
 
@@ -3414,7 +3414,7 @@ export namespace Prisma {
     jobTitle?: true
     company?: true
     industries?: true
-    trackCompanies?: true
+    companiesTracked?: true
     userId?: true
     _all?: true
   }
@@ -3493,11 +3493,11 @@ export namespace Prisma {
 
   export type ConsumerProfileGroupByOutputType = {
     id: string
-    fullName: string
-    jobTitle: string
+    fullName: string | null
+    jobTitle: string | null
     company: string | null
     industries: string[]
-    trackCompanies: string[]
+    companiesTracked: string | null
     userId: string
     _count: ConsumerProfileCountAggregateOutputType | null
     _min: ConsumerProfileMinAggregateOutputType | null
@@ -3524,7 +3524,7 @@ export namespace Prisma {
     jobTitle?: boolean
     company?: boolean
     industries?: boolean
-    trackCompanies?: boolean
+    companiesTracked?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["consumerProfile"]>
@@ -3535,7 +3535,7 @@ export namespace Prisma {
     jobTitle?: boolean
     company?: boolean
     industries?: boolean
-    trackCompanies?: boolean
+    companiesTracked?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["consumerProfile"]>
@@ -3546,7 +3546,7 @@ export namespace Prisma {
     jobTitle?: boolean
     company?: boolean
     industries?: boolean
-    trackCompanies?: boolean
+    companiesTracked?: boolean
     userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["consumerProfile"]>
@@ -3557,11 +3557,11 @@ export namespace Prisma {
     jobTitle?: boolean
     company?: boolean
     industries?: boolean
-    trackCompanies?: boolean
+    companiesTracked?: boolean
     userId?: boolean
   }
 
-  export type ConsumerProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "jobTitle" | "company" | "industries" | "trackCompanies" | "userId", ExtArgs["result"]["consumerProfile"]>
+  export type ConsumerProfileOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "fullName" | "jobTitle" | "company" | "industries" | "companiesTracked" | "userId", ExtArgs["result"]["consumerProfile"]>
   export type ConsumerProfileInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -3579,11 +3579,11 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      fullName: string
-      jobTitle: string
+      fullName: string | null
+      jobTitle: string | null
       company: string | null
       industries: string[]
-      trackCompanies: string[]
+      companiesTracked: string | null
       userId: string
     }, ExtArgs["result"]["consumerProfile"]>
     composites: {}
@@ -4014,7 +4014,7 @@ export namespace Prisma {
     readonly jobTitle: FieldRef<"ConsumerProfile", 'String'>
     readonly company: FieldRef<"ConsumerProfile", 'String'>
     readonly industries: FieldRef<"ConsumerProfile", 'String[]'>
-    readonly trackCompanies: FieldRef<"ConsumerProfile", 'String[]'>
+    readonly companiesTracked: FieldRef<"ConsumerProfile", 'String'>
     readonly userId: FieldRef<"ConsumerProfile", 'String'>
   }
     
@@ -4480,7 +4480,7 @@ export namespace Prisma {
     jobTitle: 'jobTitle',
     company: 'company',
     industries: 'industries',
-    trackCompanies: 'trackCompanies',
+    companiesTracked: 'companiesTracked',
     userId: 'userId'
   };
 
@@ -4677,8 +4677,8 @@ export namespace Prisma {
     businessName?: StringFilter<"BusinessProfile"> | string
     industry?: StringFilter<"BusinessProfile"> | string
     annualRevenue?: IntNullableFilter<"BusinessProfile"> | number | null
-    numberOfEmployees?: IntFilter<"BusinessProfile"> | number
-    companyWebsite?: StringFilter<"BusinessProfile"> | string
+    numberOfEmployees?: StringNullableFilter<"BusinessProfile"> | string | null
+    companyWebsite?: StringNullableFilter<"BusinessProfile"> | string | null
     twitter?: StringNullableFilter<"BusinessProfile"> | string | null
     linkedin?: StringNullableFilter<"BusinessProfile"> | string | null
     instagram?: StringNullableFilter<"BusinessProfile"> | string | null
@@ -4691,8 +4691,8 @@ export namespace Prisma {
     businessName?: SortOrder
     industry?: SortOrder
     annualRevenue?: SortOrderInput | SortOrder
-    numberOfEmployees?: SortOrder
-    companyWebsite?: SortOrder
+    numberOfEmployees?: SortOrderInput | SortOrder
+    companyWebsite?: SortOrderInput | SortOrder
     twitter?: SortOrderInput | SortOrder
     linkedin?: SortOrderInput | SortOrder
     instagram?: SortOrderInput | SortOrder
@@ -4709,8 +4709,8 @@ export namespace Prisma {
     businessName?: StringFilter<"BusinessProfile"> | string
     industry?: StringFilter<"BusinessProfile"> | string
     annualRevenue?: IntNullableFilter<"BusinessProfile"> | number | null
-    numberOfEmployees?: IntFilter<"BusinessProfile"> | number
-    companyWebsite?: StringFilter<"BusinessProfile"> | string
+    numberOfEmployees?: StringNullableFilter<"BusinessProfile"> | string | null
+    companyWebsite?: StringNullableFilter<"BusinessProfile"> | string | null
     twitter?: StringNullableFilter<"BusinessProfile"> | string | null
     linkedin?: StringNullableFilter<"BusinessProfile"> | string | null
     instagram?: StringNullableFilter<"BusinessProfile"> | string | null
@@ -4722,8 +4722,8 @@ export namespace Prisma {
     businessName?: SortOrder
     industry?: SortOrder
     annualRevenue?: SortOrderInput | SortOrder
-    numberOfEmployees?: SortOrder
-    companyWebsite?: SortOrder
+    numberOfEmployees?: SortOrderInput | SortOrder
+    companyWebsite?: SortOrderInput | SortOrder
     twitter?: SortOrderInput | SortOrder
     linkedin?: SortOrderInput | SortOrder
     instagram?: SortOrderInput | SortOrder
@@ -4743,8 +4743,8 @@ export namespace Prisma {
     businessName?: StringWithAggregatesFilter<"BusinessProfile"> | string
     industry?: StringWithAggregatesFilter<"BusinessProfile"> | string
     annualRevenue?: IntNullableWithAggregatesFilter<"BusinessProfile"> | number | null
-    numberOfEmployees?: IntWithAggregatesFilter<"BusinessProfile"> | number
-    companyWebsite?: StringWithAggregatesFilter<"BusinessProfile"> | string
+    numberOfEmployees?: StringNullableWithAggregatesFilter<"BusinessProfile"> | string | null
+    companyWebsite?: StringNullableWithAggregatesFilter<"BusinessProfile"> | string | null
     twitter?: StringNullableWithAggregatesFilter<"BusinessProfile"> | string | null
     linkedin?: StringNullableWithAggregatesFilter<"BusinessProfile"> | string | null
     instagram?: StringNullableWithAggregatesFilter<"BusinessProfile"> | string | null
@@ -4756,22 +4756,22 @@ export namespace Prisma {
     OR?: ConsumerProfileWhereInput[]
     NOT?: ConsumerProfileWhereInput | ConsumerProfileWhereInput[]
     id?: StringFilter<"ConsumerProfile"> | string
-    fullName?: StringFilter<"ConsumerProfile"> | string
-    jobTitle?: StringFilter<"ConsumerProfile"> | string
+    fullName?: StringNullableFilter<"ConsumerProfile"> | string | null
+    jobTitle?: StringNullableFilter<"ConsumerProfile"> | string | null
     company?: StringNullableFilter<"ConsumerProfile"> | string | null
     industries?: StringNullableListFilter<"ConsumerProfile">
-    trackCompanies?: StringNullableListFilter<"ConsumerProfile">
+    companiesTracked?: StringNullableFilter<"ConsumerProfile"> | string | null
     userId?: StringFilter<"ConsumerProfile"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type ConsumerProfileOrderByWithRelationInput = {
     id?: SortOrder
-    fullName?: SortOrder
-    jobTitle?: SortOrder
+    fullName?: SortOrderInput | SortOrder
+    jobTitle?: SortOrderInput | SortOrder
     company?: SortOrderInput | SortOrder
     industries?: SortOrder
-    trackCompanies?: SortOrder
+    companiesTracked?: SortOrderInput | SortOrder
     userId?: SortOrder
     user?: UserOrderByWithRelationInput
   }
@@ -4782,21 +4782,21 @@ export namespace Prisma {
     AND?: ConsumerProfileWhereInput | ConsumerProfileWhereInput[]
     OR?: ConsumerProfileWhereInput[]
     NOT?: ConsumerProfileWhereInput | ConsumerProfileWhereInput[]
-    fullName?: StringFilter<"ConsumerProfile"> | string
-    jobTitle?: StringFilter<"ConsumerProfile"> | string
+    fullName?: StringNullableFilter<"ConsumerProfile"> | string | null
+    jobTitle?: StringNullableFilter<"ConsumerProfile"> | string | null
     company?: StringNullableFilter<"ConsumerProfile"> | string | null
     industries?: StringNullableListFilter<"ConsumerProfile">
-    trackCompanies?: StringNullableListFilter<"ConsumerProfile">
+    companiesTracked?: StringNullableFilter<"ConsumerProfile"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "userId">
 
   export type ConsumerProfileOrderByWithAggregationInput = {
     id?: SortOrder
-    fullName?: SortOrder
-    jobTitle?: SortOrder
+    fullName?: SortOrderInput | SortOrder
+    jobTitle?: SortOrderInput | SortOrder
     company?: SortOrderInput | SortOrder
     industries?: SortOrder
-    trackCompanies?: SortOrder
+    companiesTracked?: SortOrderInput | SortOrder
     userId?: SortOrder
     _count?: ConsumerProfileCountOrderByAggregateInput
     _max?: ConsumerProfileMaxOrderByAggregateInput
@@ -4808,11 +4808,11 @@ export namespace Prisma {
     OR?: ConsumerProfileScalarWhereWithAggregatesInput[]
     NOT?: ConsumerProfileScalarWhereWithAggregatesInput | ConsumerProfileScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"ConsumerProfile"> | string
-    fullName?: StringWithAggregatesFilter<"ConsumerProfile"> | string
-    jobTitle?: StringWithAggregatesFilter<"ConsumerProfile"> | string
+    fullName?: StringNullableWithAggregatesFilter<"ConsumerProfile"> | string | null
+    jobTitle?: StringNullableWithAggregatesFilter<"ConsumerProfile"> | string | null
     company?: StringNullableWithAggregatesFilter<"ConsumerProfile"> | string | null
     industries?: StringNullableListFilter<"ConsumerProfile">
-    trackCompanies?: StringNullableListFilter<"ConsumerProfile">
+    companiesTracked?: StringNullableWithAggregatesFilter<"ConsumerProfile"> | string | null
     userId?: StringWithAggregatesFilter<"ConsumerProfile"> | string
   }
 
@@ -4906,8 +4906,8 @@ export namespace Prisma {
     businessName: string
     industry: string
     annualRevenue?: number | null
-    numberOfEmployees: number
-    companyWebsite: string
+    numberOfEmployees?: string | null
+    companyWebsite?: string | null
     twitter?: string | null
     linkedin?: string | null
     instagram?: string | null
@@ -4919,8 +4919,8 @@ export namespace Prisma {
     businessName: string
     industry: string
     annualRevenue?: number | null
-    numberOfEmployees: number
-    companyWebsite: string
+    numberOfEmployees?: string | null
+    companyWebsite?: string | null
     twitter?: string | null
     linkedin?: string | null
     instagram?: string | null
@@ -4932,8 +4932,8 @@ export namespace Prisma {
     businessName?: StringFieldUpdateOperationsInput | string
     industry?: StringFieldUpdateOperationsInput | string
     annualRevenue?: NullableIntFieldUpdateOperationsInput | number | null
-    numberOfEmployees?: IntFieldUpdateOperationsInput | number
-    companyWebsite?: StringFieldUpdateOperationsInput | string
+    numberOfEmployees?: NullableStringFieldUpdateOperationsInput | string | null
+    companyWebsite?: NullableStringFieldUpdateOperationsInput | string | null
     twitter?: NullableStringFieldUpdateOperationsInput | string | null
     linkedin?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4945,8 +4945,8 @@ export namespace Prisma {
     businessName?: StringFieldUpdateOperationsInput | string
     industry?: StringFieldUpdateOperationsInput | string
     annualRevenue?: NullableIntFieldUpdateOperationsInput | number | null
-    numberOfEmployees?: IntFieldUpdateOperationsInput | number
-    companyWebsite?: StringFieldUpdateOperationsInput | string
+    numberOfEmployees?: NullableStringFieldUpdateOperationsInput | string | null
+    companyWebsite?: NullableStringFieldUpdateOperationsInput | string | null
     twitter?: NullableStringFieldUpdateOperationsInput | string | null
     linkedin?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4958,8 +4958,8 @@ export namespace Prisma {
     businessName: string
     industry: string
     annualRevenue?: number | null
-    numberOfEmployees: number
-    companyWebsite: string
+    numberOfEmployees?: string | null
+    companyWebsite?: string | null
     twitter?: string | null
     linkedin?: string | null
     instagram?: string | null
@@ -4971,8 +4971,8 @@ export namespace Prisma {
     businessName?: StringFieldUpdateOperationsInput | string
     industry?: StringFieldUpdateOperationsInput | string
     annualRevenue?: NullableIntFieldUpdateOperationsInput | number | null
-    numberOfEmployees?: IntFieldUpdateOperationsInput | number
-    companyWebsite?: StringFieldUpdateOperationsInput | string
+    numberOfEmployees?: NullableStringFieldUpdateOperationsInput | string | null
+    companyWebsite?: NullableStringFieldUpdateOperationsInput | string | null
     twitter?: NullableStringFieldUpdateOperationsInput | string | null
     linkedin?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4983,8 +4983,8 @@ export namespace Prisma {
     businessName?: StringFieldUpdateOperationsInput | string
     industry?: StringFieldUpdateOperationsInput | string
     annualRevenue?: NullableIntFieldUpdateOperationsInput | number | null
-    numberOfEmployees?: IntFieldUpdateOperationsInput | number
-    companyWebsite?: StringFieldUpdateOperationsInput | string
+    numberOfEmployees?: NullableStringFieldUpdateOperationsInput | string | null
+    companyWebsite?: NullableStringFieldUpdateOperationsInput | string | null
     twitter?: NullableStringFieldUpdateOperationsInput | string | null
     linkedin?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -4993,70 +4993,70 @@ export namespace Prisma {
 
   export type ConsumerProfileCreateInput = {
     id?: string
-    fullName: string
-    jobTitle: string
+    fullName?: string | null
+    jobTitle?: string | null
     company?: string | null
     industries?: ConsumerProfileCreateindustriesInput | string[]
-    trackCompanies?: ConsumerProfileCreatetrackCompaniesInput | string[]
+    companiesTracked?: string | null
     user: UserCreateNestedOneWithoutConsumerProfileInput
   }
 
   export type ConsumerProfileUncheckedCreateInput = {
     id?: string
-    fullName: string
-    jobTitle: string
+    fullName?: string | null
+    jobTitle?: string | null
     company?: string | null
     industries?: ConsumerProfileCreateindustriesInput | string[]
-    trackCompanies?: ConsumerProfileCreatetrackCompaniesInput | string[]
+    companiesTracked?: string | null
     userId: string
   }
 
   export type ConsumerProfileUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    fullName?: StringFieldUpdateOperationsInput | string
-    jobTitle?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobTitle?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
     industries?: ConsumerProfileUpdateindustriesInput | string[]
-    trackCompanies?: ConsumerProfileUpdatetrackCompaniesInput | string[]
+    companiesTracked?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutConsumerProfileNestedInput
   }
 
   export type ConsumerProfileUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    fullName?: StringFieldUpdateOperationsInput | string
-    jobTitle?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobTitle?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
     industries?: ConsumerProfileUpdateindustriesInput | string[]
-    trackCompanies?: ConsumerProfileUpdatetrackCompaniesInput | string[]
+    companiesTracked?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type ConsumerProfileCreateManyInput = {
     id?: string
-    fullName: string
-    jobTitle: string
+    fullName?: string | null
+    jobTitle?: string | null
     company?: string | null
     industries?: ConsumerProfileCreateindustriesInput | string[]
-    trackCompanies?: ConsumerProfileCreatetrackCompaniesInput | string[]
+    companiesTracked?: string | null
     userId: string
   }
 
   export type ConsumerProfileUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    fullName?: StringFieldUpdateOperationsInput | string
-    jobTitle?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobTitle?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
     industries?: ConsumerProfileUpdateindustriesInput | string[]
-    trackCompanies?: ConsumerProfileUpdatetrackCompaniesInput | string[]
+    companiesTracked?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ConsumerProfileUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    fullName?: StringFieldUpdateOperationsInput | string
-    jobTitle?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobTitle?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
     industries?: ConsumerProfileUpdateindustriesInput | string[]
-    trackCompanies?: ConsumerProfileUpdatetrackCompaniesInput | string[]
+    companiesTracked?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: StringFieldUpdateOperationsInput | string
   }
 
@@ -5202,17 +5202,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -5253,7 +5242,6 @@ export namespace Prisma {
 
   export type BusinessProfileAvgOrderByAggregateInput = {
     annualRevenue?: SortOrder
-    numberOfEmployees?: SortOrder
   }
 
   export type BusinessProfileMaxOrderByAggregateInput = {
@@ -5284,7 +5272,6 @@ export namespace Prisma {
 
   export type BusinessProfileSumOrderByAggregateInput = {
     annualRevenue?: SortOrder
-    numberOfEmployees?: SortOrder
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -5301,22 +5288,6 @@ export namespace Prisma {
     _sum?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedIntNullableFilter<$PrismaModel>
     _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -5351,7 +5322,7 @@ export namespace Prisma {
     jobTitle?: SortOrder
     company?: SortOrder
     industries?: SortOrder
-    trackCompanies?: SortOrder
+    companiesTracked?: SortOrder
     userId?: SortOrder
   }
 
@@ -5360,6 +5331,7 @@ export namespace Prisma {
     fullName?: SortOrder
     jobTitle?: SortOrder
     company?: SortOrder
+    companiesTracked?: SortOrder
     userId?: SortOrder
   }
 
@@ -5368,6 +5340,7 @@ export namespace Prisma {
     fullName?: SortOrder
     jobTitle?: SortOrder
     company?: SortOrder
+    companiesTracked?: SortOrder
     userId?: SortOrder
   }
 
@@ -5465,14 +5438,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
   }
@@ -5489,10 +5454,6 @@ export namespace Prisma {
     set: string[]
   }
 
-  export type ConsumerProfileCreatetrackCompaniesInput = {
-    set: string[]
-  }
-
   export type UserCreateNestedOneWithoutConsumerProfileInput = {
     create?: XOR<UserCreateWithoutConsumerProfileInput, UserUncheckedCreateWithoutConsumerProfileInput>
     connectOrCreate?: UserCreateOrConnectWithoutConsumerProfileInput
@@ -5500,11 +5461,6 @@ export namespace Prisma {
   }
 
   export type ConsumerProfileUpdateindustriesInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type ConsumerProfileUpdatetrackCompaniesInput = {
     set?: string[]
     push?: string | string[]
   }
@@ -5666,33 +5622,6 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -5715,8 +5644,8 @@ export namespace Prisma {
     businessName: string
     industry: string
     annualRevenue?: number | null
-    numberOfEmployees: number
-    companyWebsite: string
+    numberOfEmployees?: string | null
+    companyWebsite?: string | null
     twitter?: string | null
     linkedin?: string | null
     instagram?: string | null
@@ -5727,8 +5656,8 @@ export namespace Prisma {
     businessName: string
     industry: string
     annualRevenue?: number | null
-    numberOfEmployees: number
-    companyWebsite: string
+    numberOfEmployees?: string | null
+    companyWebsite?: string | null
     twitter?: string | null
     linkedin?: string | null
     instagram?: string | null
@@ -5741,20 +5670,20 @@ export namespace Prisma {
 
   export type ConsumerProfileCreateWithoutUserInput = {
     id?: string
-    fullName: string
-    jobTitle: string
+    fullName?: string | null
+    jobTitle?: string | null
     company?: string | null
     industries?: ConsumerProfileCreateindustriesInput | string[]
-    trackCompanies?: ConsumerProfileCreatetrackCompaniesInput | string[]
+    companiesTracked?: string | null
   }
 
   export type ConsumerProfileUncheckedCreateWithoutUserInput = {
     id?: string
-    fullName: string
-    jobTitle: string
+    fullName?: string | null
+    jobTitle?: string | null
     company?: string | null
     industries?: ConsumerProfileCreateindustriesInput | string[]
-    trackCompanies?: ConsumerProfileCreatetrackCompaniesInput | string[]
+    companiesTracked?: string | null
   }
 
   export type ConsumerProfileCreateOrConnectWithoutUserInput = {
@@ -5778,8 +5707,8 @@ export namespace Prisma {
     businessName?: StringFieldUpdateOperationsInput | string
     industry?: StringFieldUpdateOperationsInput | string
     annualRevenue?: NullableIntFieldUpdateOperationsInput | number | null
-    numberOfEmployees?: IntFieldUpdateOperationsInput | number
-    companyWebsite?: StringFieldUpdateOperationsInput | string
+    numberOfEmployees?: NullableStringFieldUpdateOperationsInput | string | null
+    companyWebsite?: NullableStringFieldUpdateOperationsInput | string | null
     twitter?: NullableStringFieldUpdateOperationsInput | string | null
     linkedin?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5790,8 +5719,8 @@ export namespace Prisma {
     businessName?: StringFieldUpdateOperationsInput | string
     industry?: StringFieldUpdateOperationsInput | string
     annualRevenue?: NullableIntFieldUpdateOperationsInput | number | null
-    numberOfEmployees?: IntFieldUpdateOperationsInput | number
-    companyWebsite?: StringFieldUpdateOperationsInput | string
+    numberOfEmployees?: NullableStringFieldUpdateOperationsInput | string | null
+    companyWebsite?: NullableStringFieldUpdateOperationsInput | string | null
     twitter?: NullableStringFieldUpdateOperationsInput | string | null
     linkedin?: NullableStringFieldUpdateOperationsInput | string | null
     instagram?: NullableStringFieldUpdateOperationsInput | string | null
@@ -5810,20 +5739,20 @@ export namespace Prisma {
 
   export type ConsumerProfileUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    fullName?: StringFieldUpdateOperationsInput | string
-    jobTitle?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobTitle?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
     industries?: ConsumerProfileUpdateindustriesInput | string[]
-    trackCompanies?: ConsumerProfileUpdatetrackCompaniesInput | string[]
+    companiesTracked?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ConsumerProfileUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    fullName?: StringFieldUpdateOperationsInput | string
-    jobTitle?: StringFieldUpdateOperationsInput | string
+    fullName?: NullableStringFieldUpdateOperationsInput | string | null
+    jobTitle?: NullableStringFieldUpdateOperationsInput | string | null
     company?: NullableStringFieldUpdateOperationsInput | string | null
     industries?: ConsumerProfileUpdateindustriesInput | string[]
-    trackCompanies?: ConsumerProfileUpdatetrackCompaniesInput | string[]
+    companiesTracked?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserCreateWithoutBusinessProfileInput = {
