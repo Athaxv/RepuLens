@@ -38,8 +38,15 @@ export default function BusinessOnboardingPage() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsLoading(true)
-  
+    
     try {
+      // const resp = await fetch('https://brand-analysis-8jn8.onrender.com/dashboard');
+      // const json = await resp.json();
+      // console.log(json)
+      const res = await fetch('/api/dashboard');
+      const resp = await res.json();
+      console.log(resp);
+
       console.log(formData)
       const response = await fetch(`/api/onboarding/business/${userId}`, {
         method: "POST",

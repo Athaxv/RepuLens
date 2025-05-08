@@ -14,12 +14,25 @@ import { SentimentChart } from "./sentiment-chart"
 import { topInfluencers } from "./topInfluencers"
 import { GrowthChart } from "./growthChart"
 import { KeywordCloud } from "./KeywordCloud"
+import { useEffect, useState } from "react"
 
 // interface CompanyDashboardProps {
 //   isLoading: boolean
 // }
 
 export function CompanyDashboard({ isLoading }) {
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      const res = await fetch('/api/dashboard');
+      const json = await res.json();
+      setData(json);
+      console.log("json", json[0])
+    }
+    console.log("Main Data",data)
+    fetchData();
+  }, []);
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -66,12 +79,25 @@ export function CompanyDashboard({ isLoading }) {
                   <BarChart3 className="h-4 w-4 text-white/50" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">78%</div>
+                  <div className="text-2xl font-bold">{data[0].sentiment * 100}%</div>
                   <div className="flex items-center space-x-2">
-                    <ArrowUp className="h-4 w-4 text-green-400" />
-                    <p className="text-xs text-white/70">
-                      <span className="text-green-400 font-medium">+5.2%</span> from last month
-                    </p>
+<>
+  {(data[0].sentiment * 100 < 0) ? (
+    <>
+      <ArrowDown className="h-4 w-4 text-red-400" /> 
+      <p className="text-xs text-white/70">
+        <span className="text-red-400 font-medium">-4.7%</span> from last month
+      </p>
+    </>
+  ) : (
+    <>
+      <ArrowUp className="h-4 w-4 text-green-400" />
+      <p className="text-xs text-white/70">
+        <span className="text-green-400 font-medium">+5.2%</span> from last month
+      </p>
+    </>
+  )}
+</>                 
                   </div>
                   <Progress className="mt-3 bg-white/10" value={78} indicatorClassName="bg-amber-300" />
                 </CardContent>

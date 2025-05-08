@@ -10,7 +10,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CompetitorComparisonChart } from "./competitor-comaprison-chart"
+import { CompetitorComparisonChart } from "./competitor-comparison-chart"
 import { SectorPerformanceChart } from "./Sector-performance-chart"
 
 
