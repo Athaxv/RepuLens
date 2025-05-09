@@ -15,7 +15,7 @@ function Header() {
       <div className="container flex h-16 items-center justify-between">
         <div className="flex items-center gap-2 font-bold text-xl cursor-pointer">
           {/* <Shield className="h-6 w-6 text-primary" /> */}
-          <Image src={'/logoipsum-custom-logo.svg'} height={'30'} width={'30'} className='cursor-pointer'/>
+          <Image src={'/'} height={'30'} width={'30'} className='cursor-pointer'/>
           <span>RepuLens</span>
         </div>
         <nav className="hidden md:flex items-center gap-6">

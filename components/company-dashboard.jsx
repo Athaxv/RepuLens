@@ -21,18 +21,18 @@ import { useEffect, useState } from "react"
 // }
 
 export function CompanyDashboard({ isLoading }) {
-  const [data, setData] = useState(null);
+  // const [data, setData] = useState(null);
 
-  useEffect(() => {
-    async function fetchData() {
-      const res = await fetch('/api/dashboard');
-      const json = await res.json();
-      setData(json);
-      console.log("json", json[0])
-    }
-    console.log("Main Data",data)
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const res = await fetch('/api/dashboard');
+  //     const json = await res.json();
+  //     setData(json);
+  //     console.log("json", json[0])
+  //   }
+  //   // console.log("Main Data",data)
+  //   fetchData();
+  // }, []);
   const container = {
     hidden: { opacity: 0 },
     show: {
@@ -79,9 +79,9 @@ export function CompanyDashboard({ isLoading }) {
                   <BarChart3 className="h-4 w-4 text-white/50" />
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{data[0].sentiment * 100}%</div>
+                  <div className="text-2xl font-bold">75%</div>
                   <div className="flex items-center space-x-2">
-<>
+{/* <>
   {(data[0].sentiment * 100 < 0) ? (
     <>
       <ArrowDown className="h-4 w-4 text-red-400" /> 
@@ -97,7 +97,7 @@ export function CompanyDashboard({ isLoading }) {
       </p>
     </>
   )}
-</>                 
+</>                  */}
                   </div>
                   <Progress className="mt-3 bg-white/10" value={78} indicatorClassName="bg-amber-300" />
                 </CardContent>
